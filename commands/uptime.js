@@ -1,22 +1,19 @@
-const discord = require('discord.js');
+const Discord = require("discord.js");
+let uptime = 0;
+setInterval(e => uptime++, 1);
 
-module.exports.run = (bot, message, args) => {
-  var hrs = Math.round(bot.uptime / (1000 * 60 * 60)) + " hour(s),"
-  var mins = " " + Math.round(bot.uptime / (1000 * 60)) % 60 + " minute(s), "
-  var sec = Math.round(bot.uptime / 1000) % 60 + " second(s)"
-  if (hrs == "0 hour(s),") hrs = ""
-  if (mins == " 0 minute(s), ") mins = ""
-  let uptime = hrs+mins+sec
-  
-  let em = new discord.RichEmbed()
-  .setTitle(`**${bot.user.username} Uptime**\n`)
-  .setDescription(`**Serving ${bot.guilds.size} for ${uptime}!**`)
-  .setColor("RANDOM")
-  .setTimestamp()
-  .setFooter(`Requested by ${message.author.username}.`)
-  message.channel.send({embed: em})
+module.exports.run = async (bot, message, args) => {
+    let uptimeMsg = "";
+
+    if (uptime >= 86400000) uptimeMsg += `${Math.floor(uptime / 86400000)}d, `;
+    if (uptime >= 3600000) uptimeMsg += `${Math.floor((uptime % 86400000) / 3600000)}h, `;
+    if (uptime >= 60000) uptimeMsg += `${Math.floor((uptime % 3600000) / 60000)}m, `;
+    uptimeMsg += `${(uptime % 60000) / 1000}s`;
+    
+    message.channel.send(`BOT UPTIME: \`${uptimeMsg}\``);
 }
 
 module.exports.help = {
-  name: "uptime"
+    name: "uptime",
+    desc: "See how long the bot has been running"
 }

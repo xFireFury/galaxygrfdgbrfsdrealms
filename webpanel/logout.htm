@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Log out - Hulkbot</title>
+    <meta charset=utf8>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css">
+  </head>
+  <body>
+    <script type=text/javascript>
+      const con = confirm("Are you sure you want to logout?")
+     
+      if (con == true) {
+        document.location.href="https://fhgdev.github.io/Hulkbot/webpanel/login.html?logout=true"
+      } else {
+        alert("Taking you back to the web panel...")
+        document.location.href="https://fhgdev.github.io/Hulkbot/webpanel/panel.html"
+      }
+    </script>
+  </body>
+</html>
